@@ -21,5 +21,4 @@ export class User implements UserInterface {
 
   @Column({ nullable: true, default: null })
   active: null | string;
-
 }
