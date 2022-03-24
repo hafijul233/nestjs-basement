@@ -7,9 +7,11 @@ import { ModelRepository } from '../../../common/repositories/model.repository';
 @EntityRepository(User)
 export class UserRepository extends ModelRepository<User, UserEntity> {
   transform(model: User): UserEntity {
+
     const transformOptions = {
       groups: allUserGroupsForSerializing,
     };
+
     return plainToClass(
       UserEntity,
       classToPlain(model, transformOptions),

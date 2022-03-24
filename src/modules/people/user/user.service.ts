@@ -13,25 +13,31 @@ export class UserService {
   ) {
   }
 
-  async create(inputs: CreateUserDto) {
-    return 'This action adds a new user';
+  async create(
+    inputs: CreateUserDto,
+  ): Promise<UserEntity> {
+    return await this.userRepository.createEntity(inputs);
   }
 
   async findAll() {
-    return `This action returns all user`;
+    return await this.userRepository.find();
   }
 
-  async findOne(id: number,
-                relations : string[] = [],
-                throwsException = false):Promise<UserEntity|string> {
-    return `This action returns a #${id} user`;
+  async findOne(id: string,
+                relations: string[] = [],
+                throwsException = false,
+  ): Promise<UserEntity | string> {
+    return await this.userRepository.showEntity(id, relations, throwsException);
   }
 
-  async update(id: number, inputs: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string,
+               inputs: UpdateUserDto,
+  ): Promise<UserEntity> {
+    return await this.userRepository.updateEntity(id, inputs);
   }
 
-  async remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: string,
+  ): Promise<boolean> {
+    return await this.userRepository.deleteEntity(id);
   }
 }
