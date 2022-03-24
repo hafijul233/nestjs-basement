@@ -8,7 +8,7 @@ import {
   Delete,
   SerializeOptions,
   UseInterceptors,
-  ClassSerializerInterceptor,
+  ClassSerializerInterceptor, Res,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -77,5 +77,19 @@ export class UserController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.userService.remove(id);
+  }
+
+  @ApiBody({ description: 'Export existing user resource as CSV', type: ShowUserDto })
+  @ApiOkResponse({ description: 'Return users updated information on CSV', type: ShowUserDto })
+  @Get('/export-csv')
+  async export(@Res() res) {
+    return await this.userService.exportUserDataToCSV()
+      .then(async (fileName) =>
+        await this.userService.getExportedUserCSV(fileName)
+          .then((csvData) => {
+            res.set('Content-Type', 'text/csv');
+            return res.send(csvData);
+          }),
+      );
   }
 }
