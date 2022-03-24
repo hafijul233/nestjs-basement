@@ -15,9 +15,17 @@ import { MysqlConfigService } from '../../../config/database/mysql/config.servic
         username: mysqlConfigService.username,
         password: mysqlConfigService.password,
         database: mysqlConfigService.database,
-        entities: [
-          // ... All MySQL based schemas/entities
+        entities: ['dist/modules/**/*.entity.js'],
+        subscribers: ['dist/modules/**/*.subscriber.js'],
+        migrations: [
+          'dist/database/migrations/*.js',
         ],
+        logging: true,
+        synchronize: false,
+        charset: 'UTF8MB4_UNICODE_CI',
+        cli: {
+          migrationsDir: 'src/database/migrations',
+        },
       }),
       inject: [MysqlConfigService],
     } as TypeOrmModuleAsyncOptions),

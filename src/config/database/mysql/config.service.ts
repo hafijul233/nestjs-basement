@@ -22,11 +22,11 @@ export class MysqlConfigService {
     return this.configService.get<string>('mysql.password');
   }
 
-  get port(): string {
-    return this.configService.get<string>('mysql.port');
+  get port(): number {
+    return Number(this.configService.get<string>('mysql.port'));
   }
 
-  get database(): number {
-    return Number(this.configService.get<number>('mysql.database'));
+  get database(): string {
+    return this.configService.get<string>('mysql.database');
   }
 }
