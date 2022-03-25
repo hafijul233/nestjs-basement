@@ -5,6 +5,7 @@ import { Seeder } from './seeders';
 
 @Module({
   imports: [MysqlDatabaseProviderModule, UserSeederModule],
-  providers: [Logger, Seeder]
+  providers: [Logger, Seeder],
 })
-export class SeedersModule {}
+export class SeedersModule {
+}

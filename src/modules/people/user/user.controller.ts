@@ -28,7 +28,7 @@ import { ValidationErrorDto } from '../../../common/dtos/validation.error.dto';
 
 @Controller('users')
 @ApiTags('users')
-@ApiBearerAuth()
+/*@ApiBearerAuth()*/
 @SerializeOptions({
   groups: extendedUserGroupsForSerializing,
 })
@@ -40,7 +40,6 @@ export class UserController {
   @ApiOkResponse({ description: 'Return  created user', type: ShowUserDto })
   @ApiBadRequestResponse({ description: 'Validation failed message', type: ValidationErrorDto })
   @Post()
-  @UseInterceptors(ClassSerializerInterceptor)
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }

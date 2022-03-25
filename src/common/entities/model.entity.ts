@@ -2,12 +2,13 @@ import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
-  Entity,
+  Entity, JoinColumn, OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   VersionColumn,
 } from 'typeorm';
 import { ModelInterface } from '../interfaces/model-interface';
+import { User } from '../../modules/people/user/entities/user.entity';
 
 @Entity()
 export abstract class ModelEntity implements ModelInterface {
@@ -18,21 +19,25 @@ export abstract class ModelEntity implements ModelInterface {
   @VersionColumn({ type: 'int' })
   version: number;
 
-  @Column({ type: 'int', width: 200, nullable: true, default: null })
-  created_by: number | null;
+  /*@Column({ type: 'int', nullable: true, default: null })*/
+  @OneToOne(() => User)
+  @JoinColumn()
+  creator: User;
 
-  @Column({ type: 'int', width: 200, nullable: true, default: null })
+  @Column({ type: 'int', nullable: true, default: null })
   deleted_by: number | null;
 
-  @Column({ type: 'int', width: 200, nullable: true, default: null })
-  updated_by: number | null;
+  /*@Column({ type: 'int', nullable: true, default: null })*/
+  @OneToOne(() => User)
+  @JoinColumn()
+  updater: User;
 
-  @CreateDateColumn({ type: 'datetime', nullable: true })
+  @CreateDateColumn()
   created_at: Date;
 
-  @UpdateDateColumn({ type: 'datetime', nullable: true })
+  @UpdateDateColumn()
   updated_at: Date;
 
-  @DeleteDateColumn({ type: 'datetime', nullable: true })
+  @DeleteDateColumn()
   deleted_at: Date;
 }

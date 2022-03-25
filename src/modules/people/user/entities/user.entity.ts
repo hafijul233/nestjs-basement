@@ -1,11 +1,14 @@
 import { UserInterface } from '../interfaces/user.interface';
 import {
+  BeforeInsert,
   Column,
   Entity,
 } from 'typeorm';
 import { ModelEntity } from '../../../../common/entities/model.entity';
+import has = Reflect.has;
+import { hashPassword } from '../../../../common/helpers/utilities/password.helper';
 
-@Entity()
+@Entity('users')
 export class User extends ModelEntity implements UserInterface {
 
   @Column({ type: 'varchar', length: 255, nullable: false })
@@ -16,6 +19,12 @@ export class User extends ModelEntity implements UserInterface {
 
   @Column({ type: 'varchar', length: 255, nullable: false })
   password: string;
+
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = await hashPassword(this.password)
+    this.pin = await hashPassword(this.pin)
+  }
 
   @Column({ type: 'varchar', length: 255, nullable: false })
   pin: string;

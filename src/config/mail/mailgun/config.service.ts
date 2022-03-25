@@ -11,7 +11,7 @@ export class PostgresConfigService {
   }
 
   get host(): string {
-      return this.configService.get<string>('postgres.host');
+    return this.configService.get<string>('postgres.host');
   }
 
   get username(): string {

@@ -26,7 +26,7 @@ export const getFile = async (
 ): Promise<string | Buffer> => {
   const readFile = promisify(fs.readFile);
 
-  return encoding ? readFile(path, "utf8") : readFile(path, {});
+  return encoding ? readFile(path, 'utf8') : readFile(path, {});
 };
 
 /**

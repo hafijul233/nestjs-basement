@@ -3,6 +3,7 @@ import { UserModule } from './user/user.module';
 import { MysqlDatabaseProviderModule } from '../../providers/database/mysql/provider.module';
 
 @Module({
-  imports: [MysqlDatabaseProviderModule, UserModule]
+  imports: [MysqlDatabaseProviderModule, UserModule],
 })
-export class PeopleModule {}
+export class PeopleModule {
+}

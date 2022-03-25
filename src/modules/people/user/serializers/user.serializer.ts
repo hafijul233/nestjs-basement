@@ -17,7 +17,7 @@ export class UserSerializer extends ModelSerializer implements UserInterface {
   active: string | null;
   mobile_number: string;
   name: string;
-  @Expose({groups : ['user.password']})
+  @Expose({ groups: ['user.password'] })
   password: string;
   pin: string;
 }

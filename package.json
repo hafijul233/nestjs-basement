@@ -19,7 +19,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "db:seed": "ts-node -r tsconfig-paths/register src/seed.ts"
+    "db:seed": "ts-node -r tsconfig-paths/register src/seed.ts",
+    "dump": "ts-node src/dump"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
@@ -50,7 +51,8 @@
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "swagger-ui-express": "^4.3.0",
-    "typeorm": "^0.2.45"
+    "typeorm": "^0.2.45",
+    "typeorm-naming-strategies": "^4.0.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.2.4",
@@ -62,7 +64,7 @@
     "@types/hapi__joi": "^17.1.8",
     "@types/jest": "27.4.1",
     "@types/multer": "^1.4.7",
-    "@types/node": "^16.0.0",
+    "@types/node": "^16.11.26",
     "@types/nodemailer": "^6.4.4",
     "@types/passport-local": "^1.0.34",
     "@types/supertest": "^2.0.11",
