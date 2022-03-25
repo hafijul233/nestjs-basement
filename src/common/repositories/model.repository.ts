@@ -2,9 +2,9 @@ import { plainToClass } from 'class-transformer';
 import { Repository, DeepPartial } from 'typeorm';
 import { NotFoundException } from '@nestjs/common';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
-import { ModelEntity } from '../serializers/model.serializer';
+import { ModelSerializer } from '../serializers/model.serializer';
 
-export class ModelRepository<T, K extends ModelEntity> extends Repository<T> {
+export class ModelRepository<T, K extends ModelSerializer> extends Repository<T> {
   async showEntity(
     id: string,
     relations: string[] = [],
@@ -56,7 +56,7 @@ export class ModelRepository<T, K extends ModelEntity> extends Repository<T> {
   }
 
   transform(model: T, transformOptions = {}): K {
-    return plainToClass(ModelEntity, model, transformOptions) as K;
+    return plainToClass(ModelSerializer, model, transformOptions) as K;
   }
 
   transformMany(

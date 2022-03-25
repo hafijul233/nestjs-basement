@@ -1,5 +1,5 @@
 import { Expose } from 'class-transformer';
-import { ModelEntity } from '../../../../common/serializers/model.serializer';
+import { ModelSerializer } from '../../../../common/serializers/model.serializer';
 import { UserInterface } from '../interfaces/user.interface';
 
 
@@ -13,8 +13,7 @@ export const allUserGroupsForSerializing: string[] = [
   'user.password',
 ];
 
-export class UserEntity extends ModelEntity implements UserInterface {
-  id: string;
+export class UserSerializer extends ModelSerializer implements UserInterface {
   active: string | null;
   mobile_number: string;
   name: string;

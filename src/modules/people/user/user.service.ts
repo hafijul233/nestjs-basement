@@ -3,7 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from './user.repository';
-import { UserEntity } from './serializers/user.serializer';
+import { UserSerializer } from './serializers/user.serializer';
 import { parse } from 'json2csv';
 import { User } from './entities/user.entity';
 import {
@@ -22,7 +22,7 @@ export class UserService {
 
   async create(
     inputs: CreateUserDto,
-  ): Promise<UserEntity> {
+  ): Promise<UserSerializer> {
     return await this.userRepository.createEntity(inputs);
   }
 
@@ -33,13 +33,13 @@ export class UserService {
   async findOne(id: string,
                 relations: string[] = [],
                 throwsException = false,
-  ): Promise<UserEntity | string> {
+  ): Promise<UserSerializer | string> {
     return await this.userRepository.showEntity(id, relations, throwsException);
   }
 
   async update(id: string,
                inputs: UpdateUserDto,
-  ): Promise<UserEntity> {
+  ): Promise<UserSerializer> {
     return await this.userRepository.updateEntity(id, inputs);
   }
 

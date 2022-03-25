@@ -1,24 +1,25 @@
 import { UserInterface } from '../interfaces/user.interface';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+} from 'typeorm';
+import { ModelEntity } from '../../../../common/entities/model.entity';
 
 @Entity()
-export class User implements UserInterface {
+export class User extends ModelEntity implements UserInterface {
 
-  @PrimaryGeneratedColumn()
-  id: bigint;
-
-  @Column()
+  @Column({ type: 'varchar', length: 255, nullable: false })
   name: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 255, nullable: false, unique: true })
   mobile_number: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 255, nullable: false })
   password: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 255, nullable: false })
   pin: string;
 
-  @Column({ nullable: true, default: null })
+  @Column({ type: 'varchar', length: 255, nullable: true, default: null })
   active: null | string;
 }

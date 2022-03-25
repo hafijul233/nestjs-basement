@@ -13,7 +13,7 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { extendedUserGroupsForSerializing, UserEntity } from './serializers/user.serializer';
+import { extendedUserGroupsForSerializing, UserSerializer } from './serializers/user.serializer';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
@@ -57,7 +57,7 @@ export class UserController {
   @ApiNotFoundResponse({ description: 'If no user found by this id', type: ValidationErrorDto })
   @Get(':id')
   @UseInterceptors(ClassSerializerInterceptor)
-  findOne(@Param('id') id: string): Promise<UserEntity | string> {
+  findOne(@Param('id') id: string): Promise<UserSerializer | string> {
     return this.userService.findOne(id);
   }
 
