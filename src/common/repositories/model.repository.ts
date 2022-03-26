@@ -1,5 +1,5 @@
 import { plainToClass } from 'class-transformer';
-import { Repository, DeepPartial } from 'typeorm';
+import { DeepPartial, Repository } from 'typeorm';
 import { NotFoundException } from '@nestjs/common';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { ModelSerializer } from '../serializers/model.serializer';

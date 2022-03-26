@@ -1,4 +1,4 @@
-import { Logger, Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { UserSeederService } from './user/user-seeder.service';
 
 @Injectable()

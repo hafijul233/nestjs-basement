@@ -1,4 +1,4 @@
-import { ValidationSchema, registerSchema } from 'class-validator';
+import { registerSchema, ValidationSchema } from 'class-validator';
 
 const firstName = [
   {

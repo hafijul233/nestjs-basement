@@ -1,9 +1,5 @@
 import { UserInterface } from '../interfaces/user.interface';
-import {
-  BeforeInsert,
-  Column,
-  Entity,
-} from 'typeorm';
+import { BeforeInsert, Column, Entity } from 'typeorm';
 import { ModelEntity } from '../../../../common/entities';
 
 import { hashPassword } from '../../../../common/helpers';
@@ -22,8 +18,8 @@ export class User extends ModelEntity implements UserInterface {
 
   @BeforeInsert()
   async hashPassword() {
-    this.password = await hashPassword(this.password)
-    this.pin = await hashPassword(this.pin)
+    this.password = await hashPassword(this.password);
+    this.pin = await hashPassword(this.pin);
   }
 
   @Column({ type: 'varchar', length: 255, nullable: false })

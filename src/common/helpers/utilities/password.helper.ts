@@ -1,4 +1,4 @@
-import { hash, compare } from 'bcrypt';
+import { compare, hash } from 'bcrypt';
 
 /**
  * Returns hashed password by hash password.

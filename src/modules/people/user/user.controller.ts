@@ -1,23 +1,24 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  ClassSerializerInterceptor,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Res,
   SerializeOptions,
   UseInterceptors,
-  ClassSerializerInterceptor, Res,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { extendedUserGroupsForSerializing, UserSerializer } from './serializers/user.serializer';
 import {
   ApiBadRequestResponse,
-  ApiBearerAuth,
-  ApiBody, ApiCreatedResponse,
+  ApiBody,
+  ApiCreatedResponse,
   ApiNotFoundResponse,
-  ApiOkResponse, ApiQuery,
+  ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import { UserPaginateDto } from './dto/user.paginate.dto';
@@ -36,7 +37,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {
   }
 
-  @ApiBody({ description: 'Create a single user', type: UserDto})
+  @ApiBody({ description: 'Create a single user', type: UserDto })
   @ApiCreatedResponse({
     description: 'Return  created user',
     type: CreateDto,

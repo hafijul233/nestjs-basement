@@ -10,6 +10,7 @@ export class AppController {
   async getHello(): Promise<string> {
     return await this.appService.getHello();
   }
+
   @Get('/compare')
   async getCompare(): Promise<boolean> {
     return await this.appService.getCompare();

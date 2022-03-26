@@ -4,10 +4,7 @@ import { UserRepository } from './user.repository';
 import { UserSerializer } from './serializers/user.serializer';
 import { parse } from 'json2csv';
 import { User } from './entities/user.entity';
-import {
-  getFile, createFile,
-  checkIfFileOrDirectoryExists,
-} from '../../../common/helpers';
+import { checkIfFileOrDirectoryExists, createFile, getFile } from '../../../common/helpers';
 import { UserDto } from './dto/user.dto';
 
 
