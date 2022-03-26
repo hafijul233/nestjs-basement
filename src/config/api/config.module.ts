@@ -5,7 +5,7 @@ import { ApiConfigService } from './config.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 /**
- * Import and provide app configuration related classes.
+ * Import and provide api configuration related classes.
  *
  * @module
  */

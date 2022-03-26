@@ -19,7 +19,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
         entities: ['dist/modules/**/*.entity.{ts,js}'], //pattern issue using dist is safe
         subscribers: ['dist/modules/**/*.subscriber.{ts,js}'], //pattern issue using dist is safe
         migrations: ['dist/database/migrations/*.js'], //pattern issue using dist is safe
-        logging: true,
+        logging: ["error"],
         synchronize: true,
         dropSchema: true,
         namingStrategy: new SnakeNamingStrategy(),
