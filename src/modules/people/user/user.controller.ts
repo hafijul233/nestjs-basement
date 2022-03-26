@@ -36,7 +36,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {
   }
 
-  @ApiBody({ description: 'Create a single user' })
+  @ApiBody({ description: 'Create a single user', type: UserDto})
   @ApiCreatedResponse({
     description: 'Return  created user',
     type: CreateDto,

@@ -1,6 +1,4 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from './user.repository';
 import { UserSerializer } from './serializers/user.serializer';
@@ -9,7 +7,8 @@ import { User } from './entities/user.entity';
 import {
   getFile, createFile,
   checkIfFileOrDirectoryExists,
-} from '../../../common/helpers/utilities/storage.helper';
+} from '../../../common/helpers';
+import { UserDto } from './dto/user.dto';
 
 
 @Injectable()
@@ -21,7 +20,7 @@ export class UserService {
   }
 
   async create(
-    inputs: CreateUserDto,
+    inputs: UserDto,
   ): Promise<UserSerializer> {
     return await this.userRepository.createEntity(inputs);
   }
@@ -38,7 +37,7 @@ export class UserService {
   }
 
   async update(id: string,
-               inputs: UpdateUserDto,
+               inputs: UserDto,
   ): Promise<UserSerializer> {
     return await this.userRepository.updateEntity(id, inputs);
   }

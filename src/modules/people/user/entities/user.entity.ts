@@ -4,9 +4,9 @@ import {
   Column,
   Entity,
 } from 'typeorm';
-import { ModelEntity } from '../../../../common/entities/model.entity';
-import has = Reflect.has;
-import { hashPassword } from '../../../../common/helpers/utilities/password.helper';
+import { ModelEntity } from '../../../../common/entities';
+
+import { hashPassword } from '../../../../common/helpers';
 
 @Entity('users')
 export class User extends ModelEntity implements UserInterface {
