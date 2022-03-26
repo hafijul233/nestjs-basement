@@ -23,7 +23,7 @@ import {
 import { UserPaginateDto } from './dto/user.paginate.dto';
 import { ValidationErrorDto } from '../../../common/dtos/validation.error.dto';
 import { UserDto } from './dto/user.dto';
-import { CreateResponseDto } from '../../../common/dtos/create-response.dto';
+import { CreateDto } from '../../../common/dtos/create-response.dto';
 
 @ApiTags('User')
 /*@ApiBearerAuth()*/
@@ -36,7 +36,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {
   }
 
-  @ApiCreatedResponse({ description: 'Return  created user', type: CreateResponseDto })
+  @ApiCreatedResponse({ description: 'Return  created user', type: CreateDto })
   @ApiBadRequestResponse({ description: 'Validation failed message', type: ValidationErrorDto })
   @Post()
   create(@Body() inputs: UserDto) {

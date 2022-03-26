@@ -1,8 +1,8 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { ApiResponseDto } from './api-response.dto';
 import { IsArray } from 'class-validator';
+import { ApiDto } from './api.dto';
 
-export class ValidationErrorDto extends PartialType(ApiResponseDto) {
+export class ValidationDto extends PartialType(ApiDto) {
   @ApiProperty()
   @IsArray()
   errors: [String];
