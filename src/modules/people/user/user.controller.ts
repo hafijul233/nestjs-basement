@@ -11,8 +11,6 @@ import {
   ClassSerializerInterceptor, Res,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { extendedUserGroupsForSerializing, UserSerializer } from './serializers/user.serializer';
 import {
   ApiBadRequestResponse,
@@ -22,9 +20,10 @@ import {
   ApiOkResponse, ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
-import { ShowUserDto } from './dto/show-user.dto';
 import { UserPaginateDto } from './dto/user.paginate.dto';
 import { ValidationErrorDto } from '../../../common/dtos/validation.error.dto';
+import { UserDto } from './dto/user.dto';
+import { CreateResponseDto } from '../../../common/dtos/create-response.dto';
 
 @ApiTags('User')
 /*@ApiBearerAuth()*/
@@ -37,23 +36,21 @@ export class UserController {
   constructor(private readonly userService: UserService) {
   }
 
-  @ApiBody({ description: 'Creating new user', type: CreateUserDto })
-  @ApiCreatedResponse({ description: 'Return  created user', type: ShowUserDto })
+  @ApiCreatedResponse({ description: 'Return  created user', type: CreateResponseDto })
   @ApiBadRequestResponse({ description: 'Validation failed message', type: ValidationErrorDto })
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+  create(@Body() inputs: UserDto) {
+    return this.userService.create(inputs);
   }
 
   @ApiOkResponse({ description: 'List of all users', isArray: true, type: UserPaginateDto })
-  @ApiQuery({ type: [UserPaginateDto] })
   @Get()
-  findAll(@Body()inputs: UserPaginateDto) {
+  findAll() {
     return this.userService.findAll();
   }
 
   @ApiBody({ description: 'Return a single user', type: CreateUserDto })
-  @ApiOkResponse({ description: 'Return a single user', type: ShowUserDto })
+  @ApiOkResponse({ description: 'Return a single user', type: UserDto })
   @ApiNotFoundResponse({ description: 'If no user found by this id', type: ValidationErrorDto })
   @Get(':id')
   @UseInterceptors(ClassSerializerInterceptor)
@@ -62,7 +59,7 @@ export class UserController {
   }
 
   @ApiBody({ description: 'Updating existing user information', type: UpdateUserDto })
-  @ApiOkResponse({ description: 'Return users updated information', type: ShowUserDto })
+  @ApiOkResponse({ description: 'Return users updated information', type: UserDto })
   @ApiNotFoundResponse({ description: 'If no user found by this id', type: ValidationErrorDto })
   @ApiBadRequestResponse({ description: 'Validation failed message', type: ValidationErrorDto })
   @Patch(':id')
@@ -72,15 +69,15 @@ export class UserController {
   }
 
   @ApiBody({ description: 'Soft Deleting existing user resource', type: UpdateUserDto })
-  @ApiOkResponse({ description: 'Return users updated information', type: ShowUserDto })
+  @ApiOkResponse({ description: 'Return users updated information', type: UserDto })
   @ApiBadRequestResponse({ description: 'Validation failed message', type: ValidationErrorDto })
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.userService.remove(id);
   }
 
-  @ApiBody({ description: 'Export existing user resource as CSV', type: ShowUserDto })
-  @ApiOkResponse({ description: 'Return users updated information on CSV', type: ShowUserDto })
+  @ApiBody({ description: 'Export existing user resource as CSV', type: UserDto })
+  @ApiOkResponse({ description: 'Return users updated information on CSV', type: UserDto })
   @Get('/export-csv')
   async export(@Res() res) {
     return await this.userService.exportUserDataToCSV()
