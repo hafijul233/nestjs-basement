@@ -1,11 +1,7 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiQuery } from '@nestjs/swagger';
+import { IsOptional } from 'class-validator';
 
-export class UserPaginateDto<TData> {
-  @ApiProperty({
-    description: 'Number of items will be displayed on every request',
-    minimum: 1,
-    default: 1,
-    required: false,
-  })
+export class UserPaginateDto {
+  @IsOptional()
   per_page: number;
 }

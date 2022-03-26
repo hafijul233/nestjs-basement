@@ -22,12 +22,15 @@ async function bootstrap() {
       .setTitle('My Cash Money API Documentation')
       .setDescription('My Cash Money Remittance transfer service provider and Web API System.')
       .setContact('My Cash Money', 'https://mycash.my/', 'support@mycashmy.com')
-      .setTermsOfService('https://' + appConfigService.url + ':' +
-        appConfigService.port + '/terms-condition')
       .setLicense('My Cash Money', 'My Cash Money License')
+      .setVersion('v1')
       .addServer(appConfigService.url, 'Local Development Server')
       .build();
-    const document = SwaggerModule.createDocument(app, config);
+
+    const document = SwaggerModule.createDocument(app, config, {
+      ignoreGlobalPrefix: true
+    });
+
     SwaggerModule.setup('docs', app, document);
   }
 

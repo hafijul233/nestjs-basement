@@ -17,37 +17,38 @@ import { extendedUserGroupsForSerializing, UserSerializer } from './serializers/
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
-  ApiBody,
+  ApiBody, ApiCreatedResponse,
   ApiNotFoundResponse,
-  ApiOkResponse,
+  ApiOkResponse, ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 import { ShowUserDto } from './dto/show-user.dto';
 import { UserPaginateDto } from './dto/user.paginate.dto';
 import { ValidationErrorDto } from '../../../common/dtos/validation.error.dto';
 
-@Controller('users')
-@ApiTags('users')
+@ApiTags('User')
 /*@ApiBearerAuth()*/
+@Controller('users')
 @SerializeOptions({
   groups: extendedUserGroupsForSerializing,
 })
 export class UserController {
+
   constructor(private readonly userService: UserService) {
   }
 
   @ApiBody({ description: 'Creating new user', type: CreateUserDto })
-  @ApiOkResponse({ description: 'Return  created user', type: ShowUserDto })
+  @ApiCreatedResponse({ description: 'Return  created user', type: ShowUserDto })
   @ApiBadRequestResponse({ description: 'Validation failed message', type: ValidationErrorDto })
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
 
-  @ApiBody({ description: 'List of all system users', type: UserPaginateDto })
   @ApiOkResponse({ description: 'List of all users', isArray: true, type: UserPaginateDto })
+  @ApiQuery({ type: [UserPaginateDto] })
   @Get()
-  findAll() {
+  findAll(@Body()inputs: UserPaginateDto) {
     return this.userService.findAll();
   }
 
