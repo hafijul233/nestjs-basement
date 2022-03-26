@@ -33,11 +33,11 @@ export abstract class ModelEntity implements ModelInterface {
   updater: User;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at: null | Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at: null | Date;
 
   @DeleteDateColumn()
-  deleted_at: Date;
+  deleted_at: null | Date;
 }
