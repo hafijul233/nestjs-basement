@@ -4,7 +4,7 @@ import { UserRepository } from './user.repository';
 import { UserSerializer } from './serializers/user.serializer';
 import { parse } from 'json2csv';
 import { User } from './entities/user.entity';
-import { checkIfFileOrDirectoryExists, createFile, getFile } from '../../../common/helpers';
+import { checkIfFileOrDirectoryExists, createFile, getFile, hashPassword } from '../../../common/helpers';
 import { UserDto } from './dto/user.dto';
 
 
@@ -19,11 +19,13 @@ export class UserService {
   async create(
     inputs: UserDto,
   ): Promise<UserSerializer> {
+    inputs.password = await hashPassword(inputs.password);
+    inputs.pin = await hashPassword(inputs.pin);
     return await this.userRepository.createEntity(inputs);
   }
 
   async findAll() {
-    return await this.userRepository.find();
+    return this.userRepository.transformMany(await this.userRepository.find());
   }
 
   async findOne(id: string,
@@ -88,8 +90,7 @@ export class UserService {
     return (await getFile(filePath, 'utf8')).toString();
   }
 
-  private transformUsersDataForCSV(users: User[]) {
+  transformUsersDataForCSV(users: UserSerializer[]) {
     return [];
   }
 }
-

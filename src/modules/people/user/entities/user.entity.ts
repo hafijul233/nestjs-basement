@@ -1,8 +1,7 @@
 import { UserInterface } from '../interfaces/user.interface';
 import { BeforeInsert, Column, Entity } from 'typeorm';
-import { ModelEntity } from '../../../../common/entities';
-
 import { hashPassword } from '../../../../common/helpers';
+import { ModelEntity } from '../../../../common/entities/model.entity';
 
 @Entity('users')
 export class User extends ModelEntity implements UserInterface {

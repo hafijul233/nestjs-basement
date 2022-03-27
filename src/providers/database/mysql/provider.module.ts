@@ -20,8 +20,8 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
         subscribers: ['dist/modules/**/*.subscriber.{ts,js}'], //pattern issue using dist is safe
         migrations: ['dist/database/migrations/*.js'], //pattern issue using dist is safe
         logging: ['error'],
-        synchronize: true,
-        dropSchema: true,
+        synchronize: false,
+        dropSchema: false,
         namingStrategy: new SnakeNamingStrategy(),
         migrationsTableName: 'migrations',
         migrationsTransactionMode: 'each', //'all' is best on production

@@ -16,14 +16,14 @@ import { extendedUserGroupsForSerializing, UserSerializer } from './serializers/
 import {
   ApiBadRequestResponse,
   ApiBody,
-  ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
-  ApiTags,
+  ApiTags, getSchemaPath,
 } from '@nestjs/swagger';
 import { UserPaginateDto } from './dto/user.paginate.dto';
 import { UserDto } from './dto/user.dto';
 import { CreateDto, UpdateDto, ValidationDto } from '../../../common/dtos';
+import { User } from './entities/user.entity';
 
 
 @ApiTags('User')
@@ -37,21 +37,37 @@ export class UserController {
   constructor(private readonly userService: UserService) {
   }
 
-  @ApiBody({ description: 'Create a single user', type: UserDto })
-  @ApiCreatedResponse({
-    description: 'Return  created user',
-    type: CreateDto,
-  })
-  @ApiBadRequestResponse({ description: 'Validation failed message', type: ValidationDto })
-  @Post()
-  create(@Body() inputs: UserDto) {
-    return this.userService.create(inputs);
-  }
-
   @ApiOkResponse({ description: 'List of all users', isArray: true, type: UserPaginateDto })
   @Get()
   findAll() {
     return this.userService.findAll();
+  }
+
+  @ApiBody({ description: 'Create a single user', type: UserDto })
+  /*@ApiOkResponse({
+    status: 201,
+    description: 'testing',
+    schema: {
+      oneOf: [
+        {
+          $ref: getSchemaPath(CreateDto),
+        },
+        {
+          properties: {
+            data: {
+              items: { $ref: getSchemaPath(UserDto) },
+            },
+          },
+        },
+      ],
+    },
+    type: CreateDto,
+  })*/
+  @ApiBadRequestResponse({ description: 'Validation failed message', type: ValidationDto })
+  @Post()
+  create(@Body() inputs: UserDto) {
+    return this.userService.create(inputs);
+
   }
 
   @ApiBody({ description: 'Return a single user' })

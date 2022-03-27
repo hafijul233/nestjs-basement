@@ -1,24 +1,37 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsString } from 'class-validator';
+import { UserStatuses } from '../../../../common/constants';
 
 export class UserDto {
-  @ApiProperty()
+  @ApiProperty({
+    description: 'user full name',
+    type: 'string',
+  })
   @IsString()
   readonly name: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'user mobile number without country code',
+    type: 'string',
+  })
   @IsString()
-  readonly mobileNumber: string;
+  readonly mobile_number: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'user system login password',
+    type: 'string',
+  })
   @IsString()
-  readonly password: string;
+   password: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'user frontend login pin',
+    type: 'string',
+  })
   @IsNumber()
-  readonly pin: string;
+  pin: string;
 
-  @ApiProperty()
+  @ApiProperty({ description: 'user account status', type: 'enum', enum: UserStatuses })
   @IsString()
-  readonly active?: string;
+  readonly active?: UserStatuses;
 }
